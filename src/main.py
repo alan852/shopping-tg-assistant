@@ -5,7 +5,7 @@ from datetime import datetime
 from dotenv import find_dotenv, load_dotenv
 from telegram import Update
 from telegram.error import InvalidToken
-from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
+from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes, ApplicationHandlerStop
 
 from firefly_iii import retrieve_transactions, digest_transaction
 from env import DEFAULT, ENV
@@ -60,6 +60,8 @@ async def message_response(update: Update, context: ContextTypes.DEFAULT_TYPE):
             logger.error(e)
             response_text = error_message
         await context.bot.send_message(chat_id=update.effective_chat.id, text=response_text)
+    else:
+        raise ApplicationHandlerStop
 
 
 if __name__ == '__main__':
