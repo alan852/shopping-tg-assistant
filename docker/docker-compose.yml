@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  shopping-tg-assistant:
+    image: shopping-tg-assistant:latest
+    container_name: shopping-tg-assistant
+    env_file:
+      - ../.env
+    restart: always
+  
