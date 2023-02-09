@@ -28,8 +28,9 @@ logger.addHandler(fileHandler)
 
 admin_chat_id = os.environ.get(ENV.ADMIN_CHAT_ID)
 admin_chat_id = {int(admin_chat_id)} if admin_chat_id is not None and admin_chat_id != '' else set()
-allowed_chat_ids = {_ for _ in os.environ.get(ENV.ALLOWED_CHAT_IDS).split(',') if _ != ''}
+allowed_chat_ids = {int(_) for _ in os.environ.get(ENV.ALLOWED_CHAT_IDS).split(',') if _ != ''}
 allowed_chat_ids |= admin_chat_id
+logger.info(f'Allowed Chat IDs: {allowed_chat_ids}')
 
 error_message = os.environ.get(ENV.TELEGRAM_BOT_ERROR_MESSAGE, DEFAULT.TELEGRAM_BOT_ERROR_MESSAGE)
 
