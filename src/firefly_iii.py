@@ -54,7 +54,7 @@ def retrieve_transactions(query: str, page: int = 1) -> Iterator[Transaction]:
     config_env()
     response = requests.get(
         url.format(domain=domain),
-        params={'query': query, 'page': page},
+        params={'query': f'transaction_type:Withdrawal {query}', 'page': page},
         headers={'Authorization': f'Bearer {token}'}
     )
     txn_with_required_fields = [

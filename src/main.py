@@ -4,7 +4,6 @@ from datetime import datetime
 
 from dotenv import find_dotenv, load_dotenv
 from telegram import Update
-from telegram.constants import ParseMode
 from telegram.error import InvalidToken
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes, ApplicationHandlerStop
 
