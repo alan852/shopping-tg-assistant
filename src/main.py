@@ -55,8 +55,9 @@ async def message_response(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         logger.error(f'{e} (Ref: {transaction})')
                         unknown.append(transaction)
                 items = sorted(items, key=lambda i: i['unit_cost']['cost'])
-                response_text = '\r\n'.join(f'• {_["name"]} {_["size"]:.0f}{_["unit"]}, '
-                                            f'{_["unit_cost"]["cost"]:.2f}/{_["unit_cost"]["unit"]}'
+                response_text = '\r\n'.join(f'• {_["name"]} {_["size"]:.2f}{_["unit"]},'
+                                            f' {_["symbol"]}{_["unit_cost"]["cost"]:.2f}/{_["unit_cost"]["unit"]}'
+                                            f' {_["symbol"]}{_["cost"]}'
                                             f' on {_["date"].strftime("%d/%m/%Y")} at {_["store"]}'
                                             for _ in items)
                 if len(unknown) != 0:

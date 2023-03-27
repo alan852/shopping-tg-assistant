@@ -28,7 +28,7 @@ class Item(TypedDict):
 url: str = 'https://{domain}/api/v1/search/transactions'
 jsonpath_desc: str = "$.data[*].attributes.transactions[*]"
 jsonpath_total_pages: str = '$.meta.pagination.total_pages'
-required_fields: str = ['description', 'date', 'category_name']
+required_fields: str = ['description', 'date', 'category_name', 'currency_symbol']
 
 domain: str = None
 token: str = None
@@ -74,6 +74,6 @@ def digest_transaction(transaction: Transaction) -> Item:
     match = re.search(regex, transaction['description'], re.IGNORECASE)
     item = {'name': match.group('name'), 'size': float(match.group('size')),
             'unit': match.group('unit').upper(), 'cost': float(match.group('cost')),
-            'store': match.group('store'), 'date': transaction['date']}
+            'store': match.group('store'), 'date': transaction['date'], 'symbol': transaction['currency_symbol']}
     item['unit_cost'] = cal_unit_cost(item['cost'], item['size'], item['unit'])
     return item
