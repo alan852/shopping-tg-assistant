@@ -28,7 +28,7 @@ class Item(TypedDict):
 url: str = 'https://{domain}/api/v1/search/transactions'
 jsonpath_desc: str = "$.data[*].attributes.transactions[*]"
 jsonpath_total_pages: str = '$.meta.pagination.total_pages'
-required_fields: str = ['description', 'date', 'category_name', 'currency_symbol']
+required_fields: str = ['description', 'date', 'category_name', 'currency_symbol', 'amount']
 
 domain: str = None
 token: str = None
