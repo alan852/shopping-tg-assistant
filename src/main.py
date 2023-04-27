@@ -61,7 +61,7 @@ async def message_response(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                             f' on {_["date"].strftime("%d/%m/%Y")} at {_["store"]}'
                                             for _ in items)
                 if len(unknown) != 0:
-                    response_text += '\r\n\r\nUnknown Format\r\n' + '\r\n'.join(f'• {_["description"]} {_["currency_symbol"]}{_["amount"]:.2f}' for _ in unknown)
+                    response_text += '\r\n\r\nUnknown Format\r\n' + '\r\n'.join(f'• {_["description"]} {_["currency_symbol"]}{float(_["amount"]):.2f}' for _ in unknown)
                 response_text = response_text if response_text is not None and response_text != '' \
                     else empty_result_message
         except Exception as e:
