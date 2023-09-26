@@ -64,7 +64,10 @@ def retrieve_transactions(query: str, page: int = 1) -> Iterator[Transaction]:
         }
         for _ in parse(jsonpath_desc).find(response.json())
     ]
-    yield from filter(lambda transaction: transaction['category_name'].upper() not in excl_cat, txn_with_required_fields)
+    yield from filter(
+        lambda transaction: transaction['category_name'] is not None and transaction['category_name'].upper() not in excl_cat,
+        txn_with_required_fields
+    )
     if page != parse(jsonpath_total_pages).find(response.json())[0].value:
         yield from retrieve_transactions(query, page=page + 1)
 
